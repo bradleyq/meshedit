@@ -312,7 +312,7 @@ namespace CGL
          VertexCIter   vertex( void ) const { return _vertex; } ///< access the vertex in the half edge (const iterator)
          EdgeCIter       edge( void ) const { return _edge;   } ///< access the edge the half edge is on (const iterator)
          FaceCIter       face( void ) const { return _face;   } ///< access the face the half edge is on (const iterator)
-
+         
          /**
           * Check if the edge is a boundary edge.
           * \return true if yes, false otherwise
@@ -351,7 +351,6 @@ namespace CGL
    class Face : public HalfedgeElement
    {
       public:
-
          /**
           * initializes the face, possibly setting its boundary flag
           * (by default, a Face does not encode a boundary loop)
@@ -415,7 +414,6 @@ namespace CGL
    class Vertex : public HalfedgeElement
    {
       public:
-
          /**
           * returns some halfedge rooted at this vertex (reference)
           */
@@ -499,7 +497,6 @@ namespace CGL
    class Edge : public HalfedgeElement
    {
       public:
-
          /**
           * returns one of the two halfedges of this vertex (reference)
           */
