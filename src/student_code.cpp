@@ -193,7 +193,7 @@ namespace CGL
     // TODO Compute new positions for all the vertices in the input mesh, using the Loop subdivision rule,
     // TODO and store them in Vertex::newPosition. At this point, we also want to mark each vertex as being
     // TODO a vertex of the original mesh.
-    static const double ref[] = {0.0, 0.0, 0.0, 3.0 / 8.0};
+    static const double ref[] = {0.0, 0.0, 0.0, 3.0 / 16.0};
     std::vector<double> weights(ref, ref + sizeof(ref) / sizeof(double));
     
     //First pass. Iterate through vertices and set new to false and compute new positions.
@@ -201,11 +201,20 @@ namespace CGL
       v->isNew = false;
       int deg = (int) v->degree();
       if (deg >= weights.size()) {
-        weights.push_back(3.0 / (deg * 8.0));
+        for (int i = weights.size(); i <= deg; i += 1) {
+          weights.push_back(3.0 / (i * 8.0));
+        }
       }
-      double weight = deg * weights[deg];
-      v->computeCentroid();
-      v->newPosition = weight * v->centroid + (1 - weight) * v->position;
+      double weight = weights[deg];
+      Vector3D tmp(0.0, 0.0, 0.0);
+      HalfedgeIter start = v->halfedge();
+      HalfedgeIter h = start;
+      do {
+         h = h->twin();
+         tmp += weight * h->vertex()->position;
+         h = h->next();
+      } while (h != start);
+      v->newPosition = tmp + (1 - deg * weight) * v->position;
     }
     
     // TODO Next, compute the updated vertex positions associated with edges, and store it in Edge::newPosition.
@@ -224,7 +233,7 @@ namespace CGL
     // TODO over edges of the original mesh---otherwise, we'll end up splitting edges that we
     // TODO just split (and the loop will never end!)
     //Third pass. Iterate through all edges and split them. Split will handle transfer of new position and updating new vertex.
-    for (EdgeIter e = mesh.edgesBegin(); e != mesh.edgesEnd(); e++) {
+    for (EdgeIter e = mesh.edgesBegin(); !e->isNew; e++) {
       mesh.splitEdge(e);
     }
     
