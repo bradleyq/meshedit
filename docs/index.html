@@ -25,16 +25,16 @@
 
 <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2018</h1>
 <h1 align="middle">Project 2: Mesh Editor</h1>
-<h2 align="middle">YOUR NAME, CS184-???</h2>
+<h2 align="middle">YOUR NAME, CS184-afx</h2>
 
 <br><br>
 
 <div>
 
 <h2 align="middle">Overview</h2>
-<p>I wrote a cruve calculating and mesh loading program that allows for rendering of Bezier curves and surfaces and dae triangle meshes.
+<p>I wrote a curve calculating and mesh loading program that allows for rendering of Bezier curves and dae triangle meshes.
   The program also includes normal calculations and mesh editing features through the help of halfedge datastructures. I learned how the 
-  correct use of datastructures can allow for efficient modification of meshes (especially subdivision).
+  correct use of data structures can allow for efficient modification of meshes (especially subdivision).
 </p>
 
 <h2 align="middle">Section I: Bezier Curves and Surfaces</h2>
@@ -42,34 +42,46 @@
 <h3 align="middle">Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
 
 <p> De Casteljau's algorithm is an algorithm to intuitively find points of a Bezier curve with respect to a parametric t. I implemented it
-using a loop to constantly lerp between adjacent points (with param t) in the previous layer until there is one poiint remaining. This point 
+using a loop to constantly lerp between adjacent points (with param t) in the previous layer until there is one point remaining. This point 
 is a point on the Berzier curve by de Casteljau's algorithm.
 </p>
 
 <div align="middle">
-  <table style="width=100%">
+  <table style="width=:100%">
     <tr>
       <td>
         <img src="images/image1.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <figcaption align="middle">6 control points.</figcaption>
       </td>
       <td>
         <img src="images/image2.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <figcaption align="middle">Level 1.</figcaption>
+      </td>
+      <td>
+        <img src="images/image3.png" align="middle" width="400px"/>
+        <figcaption align="middle">Level 2.</figcaption>
       </td>
     </tr>
     <br>
     <tr>
       <td>
-        <img src="images/image3.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="images/image4.png" align="middle" width="400px"/>
+        <figcaption align="middle">Level 3.</figcaption>
       </td>
       <td>
-        <img src="images/image4.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="images/image5.png" align="middle" width="400px"/>
+        <figcaption align="middle">Level 4.</figcaption>
+      </td>
+      <td>
+        <img src="images/image6.png" align="middle" width="400px"/>
+        <figcaption align="middle">Bezier point.</figcaption>
       </td>
     </tr>
   </table>
+</div>
+<div align="middle">
+  <img src="images/image7.png" align="middle" width="400px"/>
+        <figcaption align="middle">Changed it up!</figcaption>
 </div>
 
 
@@ -81,8 +93,18 @@ is a point on the Berzier curve by de Casteljau's algorithm.
   the final Bezier surface point at (u,v).
 </p>
 <div align="middle">
-   <img src="images/image1.png" align="middle" width="400px"/>
+  <table style="width:100%">
+    <tr>
+      <td>
+        <img src="images/image8.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering of Bezier teapot.</figcaption>
+      </td>
+      <td>
+        <img src="images/image9.png" align="middle" width="400px"/>
+        <figcaption align="middle">Rendering of Bezier teapot OpenGL.</figcaption>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <h2 align="middle">Section II: Sampling</h2>
@@ -96,14 +118,14 @@ is a point on the Berzier curve by de Casteljau's algorithm.
   vertex. Normalizing the sum will give the unit normal for the vertex.
 </p>
 <div align="middle">
-  <table style="width=100%">
+  <table style="width:100%">
     <tr>
       <td>
-           <img src="images/image1.png" align="middle" width="400px"/>
+           <img src="images/image10.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering teapot without normals.</figcaption>
       </td>
       <td>
-           <img src="images/image1.png" align="middle" width="400px"/>
+           <img src="images/image11.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering teapot with normals.</figcaption>
       </td>
     </tr>
@@ -115,8 +137,8 @@ is a point on the Berzier curve by de Casteljau's algorithm.
   I implemented edge flips with pure pointer reassignment operations:
   <ul>
     <li>get pointers to every edge in the triangle pair ( I flipped the center edge clockwise since it avoids reassigning face of that edge)</li>
-    <li>reassign correct faces to halfedges</li>
-    <li>reassign vertex halfedges to perimeter edges</li>
+    <li>assign correct faces to halfedges</li>
+    <li>assign vertex halfedges to perimeter edges</li>
     <li>point face halfedge to corresponding flipped halfedge</li>
     <li>point the flipped edge next to correct destinations</li>
     <li>reassign flipped edge vertex to correct new vertex</li>
@@ -126,14 +148,14 @@ is a point on the Berzier curve by de Casteljau's algorithm.
   test their behavior (any disappearing faces/edges).
 </p>
   <div align="middle">
-  <table style="width=100%">
+  <table style="width:100%">
     <tr>
       <td>
-           <img src="images/image1.png" align="middle" width="400px"/>
+           <img src="images/image12.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering teapot no flips.</figcaption>
       </td>
       <td>
-           <img src="images/image1.png" align="middle" width="400px"/>
+           <img src="images/image13.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering teapot with flips.</figcaption>
       </td>
     </tr>
@@ -141,7 +163,7 @@ is a point on the Berzier curve by de Casteljau's algorithm.
 </div>
 <p>
 What took me the longest to figure out was the need to reassign the halfedge of vertices and faces. My first implementation did not reassign
-these pointers and thus, I had disappearing faces that would reappear after a certain number of flips. Eventually I realized what was wrong
+these pointers and thus, had disappearing faces that would reappear after a certain number of flips. Eventually I realized what was wrong
 when analyzing the pointers of the faces and vertices after flips.
 </p>
 
@@ -162,19 +184,33 @@ when analyzing the pointers of the faces and vertices after flips.
   <li>label new vertex as new. Assign its new position to the one of the split edge. reset split edge new position</li>
   <li>label new cross edge as new</li>
 </ul>
-  I really found drawing a labelled diagram helpful for this part. There are a lot of pointers to keep track of. Debugging was pretty uneventful
+  I found drawing a labeled diagram helpful for this part since there are a lot of pointers to keep track of. Debugging was pretty uneventful
   since I was more careful due to my experience with flip. The new position code was added later from part 6 as it is much easier to deal with
-  transferring positions and labeling vertices when we still have pointers to them during creation.
+  transferring positions and labeling vertices when we still have pointers to the new vertices during creation.
 </p>
 <div align="middle">
-  <table style="width=100%">
+  <table style="width:100%">
     <tr>
       <td>
-           <img src="images/image1.png" align="middle" width="400px"/>
+           <img src="images/image14.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering teapot no splits.</figcaption>
       </td>
       <td>
-           <img src="images/image1.png" align="middle" width="400px"/>
+           <img src="images/image15.png" align="middle" width="400px"/>
+        <figcaption align="middle">Rendering teapot with splits.</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+<div align="middle">
+  <table style="width:100%">
+    <tr>
+      <td>
+           <img src="images/image16.png" align="middle" width="400px"/>
+        <figcaption align="middle">Rendering teapot no flips or splits.</figcaption>
+      </td>
+      <td>
+           <img src="images/image17.png" align="middle" width="400px"/>
         <figcaption align="middle">Rendering teapot with flips and splits.</figcaption>
       </td>
     </tr>
@@ -190,13 +226,71 @@ when analyzing the pointers of the faces and vertices after flips.
   using the weighing rules shown in lectore. Weights are hardcoded.<br><br>
   Third pass is a pass over all edges. It splits every edge. Since we are guaranteed an orientable, manifold mesh, we do not need to worry about
   splitting edges or incorrect winding. Thus, we can just split everything. It is here that new cross edges are marked and positions are transferred
-  from edges to new vertices. We know when to stop splitting by checking for the first instance of a new edge since the first edge added to the iterator
-  by my algorithm is a new edge and the iterator always appends to the end.<br><br>
+  from edges to new vertices. We know when to stop splitting by checking for the first instance of a new edge in the edge iterator since the first
+  edge added to the iterator by my algorithm is a new edge and the iterator always appends to the end. (note: only the 2 new cross edges are labeled new.
+  The extension of the original edge is not labeled new)<br><br>
   Fourth pass is a pass over all edges. It flips all edges that were marked as new whose one endpoint is new and the other old. It also sets all
   new edge statuses to false for a safety measure. <br><br>
   Fifth pass is a pass over all vertices. It sets all positions of verticies to their new positions. It also resets new position variable for good
   measure.
 </p>
+<p>
+  When we subdivied with loop subdivision, we lose sharp corners and edges. This is because of the averaging of the vertices during every subdivision.
+  This loss of sharpness can be mitigated by bunching many vertices at sharp edges and corners to preserve overall position of the corner or edge.
+</p>
+<div align="middle">
+  <table style="width:100%">
+    <tr>
+      <td>
+           <img src="images/image18.png" align="middle" width="400px"/>
+        <figcaption align="middle">Original</figcaption>
+      </td>
+      <td>
+           <img src="images/image19.png" align="middle" width="400px"/>
+        <figcaption align="middle">Manipulated</figcaption>
+      </td>
+    </tr>
+    <tr>
+      <td>
+           <img src="images/image20.png" align="middle" width="400px"/>
+        <figcaption align="middle">Subdivided</figcaption>
+      </td>
+      <td>
+           <img src="images/image21.png" align="middle" width="400px"/>
+        <figcaption align="middle">Subdivided (alternate angle)</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+<p>
+  When we subdivide the cube model many times, it becomes asymmetric because the vertices have different degrees and positions of adjacent vertices.
+  This changes the weighing calculations and thus creates asymmetry. Fix the asymmetry by preprocessing the cube mesh to be symmetrical edge wise.
+  This helps because each corner vertex now has the same degree and has adjacent vertices identically distributed with respect to the origin (center).
+</p>
+<div align="middle">
+  <table style="width:100%">
+    <tr>
+      <td>
+           <img src="images/image22.png" align="middle" width="400px"/>
+        <figcaption align="middle">Original</figcaption>
+      </td>
+      <td>
+           <img src="images/image23.png" align="middle" width="400px"/>
+        <figcaption align="middle">Original subdivided</figcaption>
+      </td>
+    </tr>
+    <tr>
+      <td>
+           <img src="images/image24.png" align="middle" width="400px"/>
+        <figcaption align="middle">Preprocessed</figcaption>
+      </td>
+      <td>
+           <img src="images/image25.png" align="middle" width="400px"/>
+        <figcaption align="middle">Preprocessed subdivided</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
   
 <h2 align="middle">Section III: Mesh Competition</h2>
 <p>If you are not participating in the optional mesh competition, don't worry about this section!</p>
